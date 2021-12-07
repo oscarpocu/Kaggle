@@ -19,9 +19,10 @@ Volem aprendre quina és la categoria ('Category') a la que pertanyen les difere
 Durant aquesta pràctica hem realitzat diferents experiments per tal de pulir el nostre dataset:
 ### Experiments
 - He tret l'atribut index "Unnamed: 0" ja que no ens està aportant res.
+- Les webs duplicades s'han eliminat, per tant hem reduït el dataset de 1408 dades a 1384.
 - He probat a afegir l'atribut Category_id que conté un ID únic per cada categoria del nostre dataset (del 0 al 15).
 - WORDCLOUD: mostra les paraules de cada categoria en una imatge, on aquestes seran més grans quan més vegades apareguin en la categoria seleccionada.
-També he agregat un diccionari 'category_to_id' que conté cada 'Category' amb el seu valor: 'Category_id', per processar les dades mes endavant.
+- També he agregat un diccionari 'category_to_id' que conté cada 'Category' amb el seu valor: 'Category_id', per processar les dades mes endavant.
 
 ### Preprocessat
 - No conté valors nuls en cap atribut, per tant no haurem de tractar-los.
@@ -30,21 +31,21 @@ També he agregat un diccionari 'category_to_id' que conté cada 'Category' amb 
 - El tf-idf l'utilitzarem per trobar les 3 paraules (unigrams i bigrams) més correlacionades de cada categoria amb la funció chi2() de sklearn.feature_selection.
 ### Model
 Tots els models probats han estat probats i executats en 75% train, 25% test i amb el cross-validation k-fold, amb k=5.
-He probat a variar el train i el test en 80-20 o 50-50, he probat a canviar la k amb k=10, k=15... i els resultats no varien gaire. Penso que es degut a que les nostres dades son bastant petites per a que al modificar aquests paràmentres es crei un canvi significatiu.
+He probat a variar el train i el test en 80-20 o 50-50 i els resultats no varien gaire.
+A mesura que la k del CV s'anava augmentant de valor, els resultats eren millors, pero el temps d'execució augmenta molt. Per tant he agafat la k=5 perque és molt bó en rendiment i temps.
 | Model | Hiperparametres | Mètrica | Temps |
 | -- | -- | -- | -- |
 | [Random Forest](link) | 100 Trees, max_dept: 5 | 72% | 5227 ms |
-| [LinearSVC](link) | penalty: l2, multi_class: ovr, max_iter: 1000 | 90% | 2304 ms |
+| [LinearSVC](link) | penalty: l2, multi_class: ovr, max_iter: 1000 | 91% | 2304 ms |
 | [MultinomialNB](link) | alpha: 1.0 | 85% | 812 ms |
 | [GaussianNB](link) | var_smoothing: 1e-09 | 73% | 6173 ms |
-| [Logistic Regression](link) | penalty: l2, C: 1, max_iter: 100 | 88% | 17900 ms |
-| -- | -- | -- | -- |
-## Demo
-Per tal de fer una prova, es pot fer servir amb la següent comanda
-``` python3 demo/demo.py --input here ```
+| [Logistic Regression](link) | penalty: l2, C: 1, max_iter: 100 | 89% | 17900 ms |
+## Resultats
+He escollit el model LinearSVC per fer les proves finals:
+Un cop calibrat el nostre classificador ens dona un score força alt del 94% amb molt poques errades que es poden veure en la matriu de confusió.
 ## Conclusions
-- El millor model que s'ha aconseguit ha estat el LinearSVC ja que te un accuracy molt alt (del 90%) i s'executa a una gran velocitat.
-- En comparació amb altres treballs que he analitzat podem veure que eliminen els valors duplicats del cleaned_website_text (que passen a ser 1375 dades en comptes de 1408), però els resultats no varien gaire el percentatge del accuracy dels models ja que el LinearSVC segueix guanyant amb un 90%. En altres treballs han escollit el classificador de Bayes (multinomialNB) que entrenat normal (sense CV) arriba al 88% d'accuracy, i encara que jo segueixo preferint el LinearSVC, pot ser un model interessant.
+- El millor model que s'ha aconseguit ha estat el LinearSVC ja que de tots els models probats te el accuracy més alt i s'executa a una gran velocitat.
+- En comparació amb altres treballs que he analitzat podem veure que eliminen els valors duplicats del cleaned_website_text (que passen a ser 1375 dades en comptes de 1408), però els resultats no varien gaire el percentatge del accuracy dels models ja que el LinearSVC segueix guanyant amb un 91%. En altres treballs han escollit el classificador de Bayes (multinomialNB) que entrenat normal (sense CV) arriba al 89% d'accuracy, i encara que jo segueixo preferint el LinearSVC, pot ser un model interessant.
 ## Idees per treballar en un futur
 Crec que seria interesant indagar més en...
 ## Llicencia
