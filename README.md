@@ -18,18 +18,19 @@ Volem aprendre quina és la categoria ('Category') a la que pertanyen les difere
 ## Tractament de dades
 Durant aquesta pràctica hem realitzat diferents experiments per tal de pulir el nostre dataset:
 ### Experiments
-He tret l'atribut index "Unnamed: 0" ja que no ens està aportant res.
-He probat a afegir l'atribut Category_id que conté un ID únic per cada categoria del nostre dataset (del 0 al 15).
-WORDCLOUD: mostra les paraules de cada categoria en una imatge, on aquestes seran més grans quan més vegades apareguin en la categoria seleccionada.
+- He tret l'atribut index "Unnamed: 0" ja que no ens està aportant res.
+- He probat a afegir l'atribut Category_id que conté un ID únic per cada categoria del nostre dataset (del 0 al 15).
+- WORDCLOUD: mostra les paraules de cada categoria en una imatge, on aquestes seran més grans quan més vegades apareguin en la categoria seleccionada.
 També he agregat un diccionari 'category_to_id' que conté cada 'Category' amb el seu valor: 'Category_id', per processar les dades mes endavant.
 
 ### Preprocessat
-No conté valors nuls en cap atribut, per tant no haurem de tractar-los.
-Com no tenim dades numériques (tret del index) tampoc podem treure outliers ni fer normalitzacions.
-Per a preprocessar les dades transformarem les nostres dades de text del 'cleaned_website_text' en números, tenint en compte la freqüéncia en la que surten les paraules: tf-idf.
-El tf-idf l'utilitzarem per trobar les 3 paraules (unigrams i bigrams) més correlacionades de cada categoria amb la funció chi2() de sklearn.feature_selection.
+- No conté valors nuls en cap atribut, per tant no haurem de tractar-los.
+- Com no tenim dades numériques (tret del index) tampoc podem treure outliers ni fer normalitzacions.
+- Per a preprocessar les dades transformarem les nostres dades de text del 'cleaned_website_text' en números, tenint en compte la freqüéncia en la que surten les paraules: tf-idf.
+- El tf-idf l'utilitzarem per trobar les 3 paraules (unigrams i bigrams) més correlacionades de cada categoria amb la funció chi2() de sklearn.feature_selection.
 ### Model
-Tots els models probats han estat probats i executats amb el cross-validation k-fold, amb k=5.
+Tots els models probats han estat probats i executats en 75% train, 25% test i amb el cross-validation k-fold, amb k=5.
+He probat a variar el train i el test en 80-20 o 50-50, he probat a canviar la k amb k=10, k=15... i els resultats no varien gaire. Penso que es degut a que les nostres dades son bastant petites per a que al modificar aquests paràmentres es crei un canvi significatiu.
 | Model | Hiperparametres | Mètrica | Temps |
 | -- | -- | -- | -- |
 | [Random Forest](link) | 100 Trees, max_dept: 5 | 72% | 5227 ms |
@@ -42,8 +43,8 @@ Tots els models probats han estat probats i executats amb el cross-validation k-
 Per tal de fer una prova, es pot fer servir amb la següent comanda
 ``` python3 demo/demo.py --input here ```
 ## Conclusions
-El millor model que s'ha aconseguit ha estat el LinearSVC ja que te un accuracy molt alt i s'executa a una gran velocitat.
-En comparació amb l'estat de l'art i els altres treballs que hem analitzat....
+- El millor model que s'ha aconseguit ha estat el LinearSVC ja que te un accuracy molt alt (del 90%) i s'executa a una gran velocitat.
+- En comparació amb altres treballs que he analitzat podem veure que eliminen els valors duplicats del cleaned_website_text (que passen a ser 1375 dades en comptes de 1408), però els resultats no varien gaire el percentatge del accuracy dels models ja que el LinearSVC segueix guanyant amb un 90%. En altres treballs han escollit el classificador de Bayes (multinomialNB) que entrenat normal (sense CV) arriba al 88% d'accuracy, i encara que jo segueixo preferint el LinearSVC, pot ser un model interessant.
 ## Idees per treballar en un futur
 Crec que seria interesant indagar més en...
 ## Llicencia
