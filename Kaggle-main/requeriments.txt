@@ -1,0 +1,28 @@
+from sklearn.datasets import make_regression
+%matplotlib notebook
+from matplotlib import pyplot as plt
+import scipy.stats
+from scipy.stats import randint
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from io import StringIO
+from IPython.display import display
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_selection import chi2
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix
+from sklearn import metrics
+from sklearn.calibration import CalibratedClassifierCV
+
+from wordcloud import WordCloud, STOPWORDS
+from time import time
