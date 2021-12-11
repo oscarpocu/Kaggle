@@ -45,7 +45,8 @@ A mesura que la k del CV s'anava augmentant de valor, els resultats eren millors
 ## Resultats
 - He escollit el model LinearSVC per fer les proves finals:
 Un cop calibrat el nostre classificador ens dona un score força alt del 94% amb molt poques errades que es poden veure en la matriu de confusió.
-- Aplicant només unigrames al tf-idf: s'executa una mica mes ràpid, baixa lleugerament l'accuracy del GaussianNB
+- Aplicant només unigrames al tf-idf: s'executa una mica mes ràpid, baixa lleugerament l'accuracy del GaussianNB. 
+
 | Model | Hiperparametres | Mètrica | Temps |
 | -- | -- | -- | -- |
 | [Random Forest](link) | 100 Trees, max_dept: inf | 84% | 13776 ms |
@@ -54,6 +55,7 @@ Un cop calibrat el nostre classificador ens dona un score força alt del 94% amb
 | [GaussianNB](link) | var_smoothing: 1e-09 | 64% | 3365 ms |
 | [Logistic Regression](link) | penalty: l2, C: 1, max_iter: 100 | 89% | 13563 ms |
 - Aplicant només bigrames al tf-idf: s'executa molt més ràpid ja que no hi han tantes paraules. En general els accuracys baixen aproximadament un 15%.
+
 | Model | Hiperparametres | Mètrica | Temps |
 | -- | -- | -- | -- |
 | [Random Forest](link) | 100 Trees, max_dept: inf | 65% | 17830 ms |
