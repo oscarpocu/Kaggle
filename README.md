@@ -37,13 +37,30 @@ A mesura que la k del CV s'anava augmentant de valor, els resultats eren millors
 | Model | Hiperparametres | Mètrica | Temps |
 | -- | -- | -- | -- |
 | [Random Forest](link) | 100 Trees, max_dept: 5 | 68% | 5227 ms |
+| [Random Forest](link) | 100 Trees, max_dept: inf | 83% | 17310 ms |
 | [LinearSVC](link) | penalty: l2, multi_class: ovr, max_iter: 1000 | 91% | 2304 ms |
 | [MultinomialNB](link) | alpha: 1.0 | 85% | 812 ms |
 | [GaussianNB](link) | var_smoothing: 1e-09 | 73% | 6173 ms |
 | [Logistic Regression](link) | penalty: l2, C: 1, max_iter: 100 | 89% | 17900 ms |
 ## Resultats
-He escollit el model LinearSVC per fer les proves finals:
+- He escollit el model LinearSVC per fer les proves finals:
 Un cop calibrat el nostre classificador ens dona un score força alt del 94% amb molt poques errades que es poden veure en la matriu de confusió.
+- Aplicant només unigrames al tf-idf: s'executa una mica mes ràpid, baixa lleugerament l'accuracy del GaussianNB
+| Model | Hiperparametres | Mètrica | Temps |
+| -- | -- | -- | -- |
+| [Random Forest](link) | 100 Trees, max_dept: inf | 84% | 13776 ms |
+| [LinearSVC](link) | penalty: l2, multi_class: ovr, max_iter: 1000 | 91% | 1511 ms |
+| [MultinomialNB](link) | alpha: 1.0 | 85% | 420 ms |
+| [GaussianNB](link) | var_smoothing: 1e-09 | 64% | 3365 ms |
+| [Logistic Regression](link) | penalty: l2, C: 1, max_iter: 100 | 89% | 13563 ms |
+- Aplicant només bigrames al tf-idf: s'executa molt més ràpid ja que no hi han tantes paraules. En general els accuracys baixen aproximadament un 15%.
+| Model | Hiperparametres | Mètrica | Temps |
+| -- | -- | -- | -- |
+| [Random Forest](link) | 100 Trees, max_dept: inf | 65% | 17830 ms |
+| [LinearSVC](link) | penalty: l2, multi_class: ovr, max_iter: 1000 | 76% | 555 ms |
+| [MultinomialNB](link) | alpha: 1.0 | 71% | 195 ms |
+| [GaussianNB](link) | var_smoothing: 1e-09 | 74% | 1700 ms |
+| [Logistic Regression](link) | penalty: l2, C: 1, max_iter: 100 | 73% | 4926 ms |
 ## Conclusions
 - El millor model que s'ha aconseguit ha estat el LinearSVC ja que de tots els models probats te el accuracy més alt i s'executa a una gran velocitat.
 - En comparació amb altres treballs que he analitzat podem veure que eliminen els valors duplicats del cleaned_website_text (que passen a ser 1375 dades en comptes de 1408), però els resultats no varien gaire el percentatge del accuracy dels models ja que el LinearSVC segueix guanyant amb un 91%. En altres treballs han escollit el classificador de Bayes (multinomialNB) que entrenat normal (sense CV) arriba al 89% d'accuracy, i encara que jo segueixo preferint el LinearSVC, pot ser un model interessant.
