@@ -46,6 +46,10 @@ A mesura que la k del CV s'anava augmentant de valor, els resultats eren millors
 - He escollit el model LinearSVC per fer les proves finals:
 Un cop calibrat el nostre classificador ens dona un score força alt del 94% amb molt poques errades que es poden veure en la matriu de confusió.
 - També he probat a calcular el accuracy amb el Pipeline en comptes del cross-validation k=5. En general triga uns 5 minuts (molt més que amb el cv) i l'accuracy es del 89% (en comptes del 94% amb el cv).
+- SVC kernel:'rbf' = 87% accuracy. (temps d'execució = 260 seg)!
+- SVC kernel:'linear' = 90% accuracy. (temps d'execució = 240 seg)!
+- SVC kernel:'linear', C=100 = 83% accuracy. (temps d'execució = 240 seg)!
+- SVC kernel:'poly' = 43% accuracy. (temps d'execució = 250 seg)!
 - Aplicant només unigrames al tf-idf: s'executa una mica mes ràpid, baixa lleugerament l'accuracy del GaussianNB. 
 
 | Model | Hiperparametres | Mètrica | Temps |
